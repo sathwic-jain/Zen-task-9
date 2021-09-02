@@ -1,0 +1,29 @@
+
+var  request= new XMLHttpRequest();
+ 
+request.open('GET','https://restcountries.eu/rest/v2/all',true);
+request.send();
+
+request.onload=function(){
+var data=JSON.parse(request.response);
+console.log(data);
+
+//countries from asia
+var asia=data.filter((element)=>element.region=='Asia'); 
+console.log(asia);
+
+//countries with population less than 2 lakhs
+var population_less_2lk=data.filter((element)=>element.population<200000);
+console.log(population_less_2lk);
+
+//Print the following details name, capital, flag using forEach function
+data.forEach(element=>console.log(`${element.name},${element.capital},${element.flag}`));
+
+// total population of countries using reduce function
+var res=data.reduce((sum,ele)=>{return sum+ele.population;},0);
+console.log(res);
+
+// country which uses US Dollars as currency
+var country_usdollar=data.filter((element)=>element.currencies[0].code=='USD');
+console.log(country_usdollar);
+}
