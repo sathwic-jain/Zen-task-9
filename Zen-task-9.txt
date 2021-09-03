@@ -24,6 +24,16 @@ var res=data.reduce((sum,ele)=>{return sum+ele.population;},0);
 console.log(res);
 
 // country which uses US Dollars as currency
-var country_usdollar=data.filter((element)=>element.currencies[0].code=='USD');
-console.log(country_usdollar);
+//all countries that use USD
+var country_usdollar=data.filter((element)=>{
+    for(let x in element.currencies)
+    {
+        if(element.currencies[x].code=='USD') return element;
+    }
+})
+console.log(country_usdollar)
+for(let x in country_usdollar)
+{
+    console.log(country_usdollar[x].name);
+}
 }
